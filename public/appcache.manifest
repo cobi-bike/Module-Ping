@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# Version 41
+
+CACHE:
+# Defines resources to be cached 
+index.js
+slider.js
+style.css
+cobi-style.css
+edit.js
+
+NETWORK:
+*
