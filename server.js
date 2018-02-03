@@ -71,8 +71,8 @@ app.post('/text', function(req, res, next) {
       console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' with token ' + token);
     
       var client = new twilio.RestClient(
-        '***REMOVED***',
-        '***REMOVED***'
+        '123',
+        '123'
       );
 
       var options = {
