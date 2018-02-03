@@ -71,13 +71,13 @@ app.post('/text', function(req, res, next) {
       console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' with token ' + token);
     
       var client = new twilio.RestClient(
-        '123',
-        '123'
+        'ACdec398cf5a6e1255056a982b227530e5',
+        'a8cffab9c36b814f909f778c865b5108'
       );
 
       var options = {
         to:  recipient,
-        from: '***REMOVED***',
+        from: '+4915735993825',
         body: message,
         statusCallback: null
       };
