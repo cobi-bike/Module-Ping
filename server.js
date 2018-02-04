@@ -6,6 +6,7 @@ var express = require('express');
 var app = express();
 var twilio = require('twilio');
 var formidable = require("formidable");
+var config = require('./config');
 
 // init in-memory db for quotas 
 var db = {};
@@ -71,13 +72,13 @@ app.post('/text', function(req, res, next) {
       console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' with token ' + token);
     
       var client = new twilio.RestClient(
-        'ACdec398cf5a6e1255056a982b227530e5',
-        'a8cffab9c36b814f909f778c865b5108'
+        config.twilio.account_sid,
+        config.twilio.auth_token
       );
 
       var options = {
         to:  recipient,
-        from: '+4915735993825',
+        from: config.twilio.from_number,
         body: message,
         statusCallback: null
       };
