@@ -1,12 +1,11 @@
 // Init Constants
 
-const localStorageKeyToken = 'ping-utoken';
-const localStorageKeyUserName = 'ping-uname';
-const localStorageKeyMessageQuota = 'ping-quota';
-const localStorageKeyAttachLocation = 'ping-attachlocation';
-
-const defaultUserName = i18next.t('default-sender');
-const dailyMessageQuota = 3;
+var localStorageKeyToken = 'ping-utoken',
+    localStorageKeyUserName = 'ping-uname',
+    localStorageKeyMessageQuota = 'ping-quota',
+    localStorageKeyAttachLocation = 'ping-attachlocation',
+    defaultUserName = i18next.t('default-sender'),
+    dailyMessageQuota = 3;
 
 // Manage Settings
 
