@@ -19,7 +19,7 @@ if (token == null || token == '') {
 if (COBI.parameters.state() != COBI.state.edit) { 
   $(window).load(function(){
     'use strict';
-    sliderTeam.init();
+    carousel.init();
   });
 }
 
@@ -39,8 +39,8 @@ COBI.navigationService.eta.subscribe(function(value) {
 });
 
 COBI.hub.externalInterfaceAction.subscribe(function(action) {
-  if (action == 'UP' || action == 'RIGHT') sliderTeam.next();
-  if (action == 'DOWN' || action == 'LEFT') sliderTeam.prev();
+  if (action == 'UP' || action == 'RIGHT') carousel.next();
+  if (action == 'DOWN' || action == 'LEFT') carousel.prev();
   if (action == 'SELECT') {
    COBI.app.contact.read(function(contact) {
      sendMessage(contact.phone);
@@ -61,7 +61,7 @@ function sendMessage(phoneNumber) {
   
     var message = '';
   
-    switch (sliderTeam.current()) {
+    switch (carousel.current()) {
          // On my way
         case 0: message = userName + i18next.t('on-my-way-template');
             break;

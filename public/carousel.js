@@ -1,7 +1,7 @@
-var sliderTeam = (function(document, $) {
+var carousel = (function(document, $) {
   'use strict';
   
-  var $sliderTeams = $('.slider--teams'),
+  var $carousel = $('.carousel'),
       $list = $('#list'),
       $listItems = $('#list li'),
       $nItems = $listItems.length,
@@ -20,7 +20,7 @@ var sliderTeam = (function(document, $) {
           'width': Math.floor(100 * ($nItems / $nView)) + '%'
         });
         $listItems.css('width', 100 / $nItems + '%');
-        $sliderTeams.delay(250).animate({ opacity: 1 }, { duration: 500 });
+        $carousel.delay(250).animate({ opacity: 1 }, { duration: 500 });
       },
       
       _eventInit = function() {

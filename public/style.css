@@ -23,7 +23,7 @@ ul li {
   list-style-type: none;
 }
 
-.slider--teams {
+.carousel {
   font-family: 'UniSansBook', sans-serif;
   font-size: 100%;
   letter-spacing: 0.1em;
@@ -37,7 +37,7 @@ ul li {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
-.slider--teams .slider--teams__team {
+.carousel .carousel-item {
   position: relative;
   overflow: hidden;
 }
