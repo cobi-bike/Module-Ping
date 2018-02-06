@@ -1,69 +1,107 @@
 // Init Constants
 
-var localStorageKeyToken = 'ping-utoken',
-    localStorageKeyUserName = 'ping-uname',
-    localStorageKeyMessageQuota = 'ping-quota',
-    localStorageKeyAttachLocation = 'ping-attachlocation',
-    defaultUserName = i18next.t('default-sender'),
-    dailyMessageQuota = 3;
+var localStorageKeyToken = 'ping-utoken';
+var localStorageKeyUsername = 'ping-uname';
+var localStorageKeyMessageQuota = 'ping-quota';
+var localStorageKeyAttachLocation = 'ping-attachlocation';
+var defaultUsername = i18next.t('default-sender');
+var dailyMessageQuota = 3;
 
 // Manage Settings
 
-if (COBI.parameters.state() == COBI.state.edit) {
-  document.getElementById('experience').style.display = 'none';
-} else {
-  document.getElementById('edit').style.display = 'none';  
-}
 
 // Defaults
 
-if (!localStorage.getItem(localStorageKeyAttachLocation)) localStorage.setItem(localStorageKeyAttachLocation, JSON.stringify(true));
-if (!localStorage.getItem(localStorageKeyMessageQuota)) localStorage.setItem(localStorageKeyMessageQuota, JSON.stringify({}));
 
-// Setting: User Name
+// Manage Token
 
-var userName = localStorage.getItem(localStorageKeyUserName);
-if (userName == null || userName == '') {
-  userName = defaultUserName;
-}
+
 
 var senderInput = document.getElementById("senderInput");
-senderInput.value = userName;
+senderInput.value = getUsername();
 senderInput.addEventListener("input", function(event) {
-  localStorage.setItem(localStorageKeyUserName, senderInput.value);
+  setUsername(senderInput.value)
 });
 
 // Setting: Attach Location
 
 var attachLocationToggle = document.getElementById("attachLocationToggle");
-attachLocationToggle.checked = getAttachLocationSetting();
+attachLocationToggle.checked = getAttachLocation();
 attachLocationToggle.onchange = function() {
-  localStorage.setItem(localStorageKeyAttachLocation, JSON.stringify(attachLocationToggle.checked));
+  setAttachLocation(attachLocationToggle.checked);
 };
 
-function getAttachLocationSetting() {
-  return JSON.parse(localStorage.getItem(localStorageKeyAttachLocation));
+function getUsername() {
+  var username = localStorage.getItem(localStorageKeyUsername);
+  if (username == null || username == '') {
+    return defaultUsername;
+  } else {
+    return username;
+  }
 }
+
+function setUsername(username) {
+  localStorage.setItem(localStorageKeyUsername, username);
+}
+
+function getAttachLocation() {
+  attachLocation = JSON.parse(localStorage.getItem(localStorageKeyAttachLocation));
+  if (attachLocation == null) {
+    return true;
+  } else {
+    return attachLocation;
+  }
+}
+
+function setAttachLocation(checked) {
+  localStorage.setItem(localStorageKeyAttachLocation, JSON.stringify(checked));
+}
+
 
 // Quota
 
 function getMessagesSent() {
   var messages = JSON.parse(localStorage.getItem(localStorageKeyMessageQuota));
+  if (messages == null) {
+    return {};
+  } else {
+    return messages;
+  }
+}
+
+function getMessagesSentCount() {
+  var messages = getMessagesSent();
   var qId = getQuotaId();
   return (messages[qId] == null) ? 0 : messages[qId];
 }
 
 function incrementMessagesSent() {
-  var messages = JSON.parse(localStorage.getItem(localStorageKeyMessageQuota));
+  var messages = getMessagesSent();
   var qId = getQuotaId();
-  messages[qId] = getMessagesSent() + 1;
+  messages[qId] = getMessagesSentCount() + 1;
   localStorage.setItem(localStorageKeyMessageQuota, JSON.stringify(messages));
 }
 
-function getMessageQuotaExceeded() {
-  return getMessagesSent() >= dailyMessageQuota;
+function isMessageQuotaExceeded() {
+  return getMessagesSentCount() >= dailyMessageQuota;
 }
 
 function getQuotaId() {
   return new Date().toISOString().slice(0, 10);
+}
+
+function getToken() {
+  var token = localStorage.getItem(localStorageKeyToken);
+  if (token == null || token == '') {
+    token = generateGuid();
+    localStorage.setItem(localStorageKeyToken, token);
+  }
+  return token;
+}
+
+function generateGuid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }

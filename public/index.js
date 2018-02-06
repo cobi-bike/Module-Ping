@@ -3,20 +3,13 @@
 COBI.init('token');
 COBI.devkit.overrideThumbControllerMapping.write(true);
 
-var lastLocation = null;
-var lastEta = null;
-
-// Manage Token
-
-var token = localStorage.getItem(localStorageKeyToken);
-if (token == null || token == '') {
-  token = generateGuid();
-  localStorage.setItem(localStorageKeyToken, token);
-}
 
 // Init Slider if needed
 
-if (COBI.parameters.state() != COBI.state.edit) { 
+if (COBI.parameters.state() == COBI.state.edit) { 
+  document.getElementById('experience').style.display = 'none';
+} else {
+  document.getElementById('edit').style.display = 'none';  
   $(window).load(function(){
     'use strict';
     carousel.init();
@@ -25,10 +18,12 @@ if (COBI.parameters.state() != COBI.state.edit) {
 
 // COBI Subscriptions
 
+var lastLocation = null;
 COBI.mobile.location.subscribe(function(location) {
   lastLocation = location;
 });
 
+var lastEta = null;
 COBI.navigationService.eta.subscribe(function(value) {
   if (value && value > 0) {
     lastEta = new Date(value * 1000);
@@ -43,47 +38,48 @@ COBI.hub.externalInterfaceAction.subscribe(function(action) {
   if (action == 'DOWN' || action == 'LEFT') carousel.prev();
   if (action == 'SELECT') {
    COBI.app.contact.read(function(contact) {
-     sendMessage(contact.phone);
+     sendMessage(contact.phone, carousel.current());
    });
   }
 });
 
 // Helper methods
 
-function sendMessage(phoneNumber) {
+function sendMessage(phoneNumber, carouselItemId) {
   
     // Can send SMS?
-    if (getMessageQuotaExceeded()) {
+    if (isMessageQuotaExceeded()) {
       COBI.app.textToSpeech.write({"content" : i18next.t('message-quota-exceeded-tts'), "language" : i18next.language})
       Materialize.toast(i18next.t('message-quota-exceeded'), 5000, 'rounded white');
       return;
     }
   
     var message = '';
+    var username = getUsername();
   
-    switch (carousel.current()) {
+    switch (carouselItemId) {
          // On my way
-        case 0: message = userName + i18next.t('on-my-way-template');
+        case 0: message = username + i18next.t('on-my-way-template');
             break;
 
         // Almost there
-        case 1: message = userName + i18next.t('almost-there-template');
+        case 1: message = username + i18next.t('almost-there-template');
             break;
            
         // Running late
-        case 2: message = userName + i18next.t('running-late-template');
+        case 2: message = username + i18next.t('running-late-template');
             break;
         
         // I'm here
-        case 3: message = userName + i18next.t('im-here-template');
+        case 3: message = username + i18next.t('im-here-template');
             break;                    
         
         // Love this place
-        case 4: message = userName + i18next.t('love-place-template');
+        case 4: message = username + i18next.t('love-place-template');
             break; 
         
         // Call me
-        case 5: message = userName + i18next.t('call-me-template');
+        case 5: message = username + i18next.t('call-me-template');
             break;          
     }
   
@@ -93,7 +89,7 @@ function sendMessage(phoneNumber) {
     }
   
     // Append location if available and configured
-    if (lastLocation != null && getAttachLocationSetting()) {
+    if (lastLocation != null && getAttachLocation()) {
       message += ' ' + 'https://maps.google.com/?q=' + lastLocation.coordinate.latitude + ',' + lastLocation.coordinate.longitude;  
     }
   
@@ -117,15 +113,8 @@ function sendMessage(phoneNumber) {
     var data = new FormData();
     data.append('message', message);
     data.append('recipient', phoneNumber);
-    data.append('token', token);
+    data.append('token', getToken());
 
     request.open("POST", "text", true);
     request.send(data);
-}
-
-function generateGuid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
