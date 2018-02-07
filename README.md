@@ -54,10 +54,10 @@ Let's take a deeper look to understand how the »Ping«-App works:
 ├── LICENSE
 ├── package.json
 ├── public
-│   ├── appcache.manifest   Cache-File
+│   ├── appcache.manifest   Cache-file
 │   ├── carousel.js         Carousel menu
 │   ├── cobi-style.css
-│   ├── config.js           i18-Translations
+│   ├── config.js           i18-translations
 │   ├── edit.js             Settings menu
 │   ├── index.js            Main menu
 │   └── style.css
