@@ -1,28 +1,29 @@
-// COBI.js Initialization
-
+// Initialize COBI.js
 COBI.init('token');
 COBI.devkit.overrideThumbControllerMapping.write(true);
 
 
-// Init Slider if needed
-
+// Check if where in main menu oder settings menu
 if (COBI.parameters.state() == COBI.state.edit) { 
   document.getElementById('experience').style.display = 'none';
 } else {
   document.getElementById('edit').style.display = 'none';  
+  //Initinalize main menu carousel
   $(window).load(function(){
     'use strict';
     carousel.init();
   });
 }
 
-// COBI Subscriptions
+// Hook onto COBI subscriptions to gather position data
 
+// Determine current location coordinates
 var lastLocation = null;
 COBI.mobile.location.subscribe(function(location) {
   lastLocation = location;
 });
 
+// Determine estimated time of arrival
 var lastEta = null;
 COBI.navigationService.eta.subscribe(function(value) {
   if (value && value > 0) {
@@ -33,22 +34,27 @@ COBI.navigationService.eta.subscribe(function(value) {
   }
 });
 
+// Listen for input from the external controler
 COBI.hub.externalInterfaceAction.subscribe(function(action) {
+  // Swipe carousel based on input
   if (action == 'UP' || action == 'RIGHT') carousel.next();
   if (action == 'DOWN' || action == 'LEFT') carousel.prev();
   if (action == 'SELECT') {
-   COBI.app.contact.read(function(contact) {
-     sendMessage(contact.phone, carousel.current());
-   });
+    // Present user with contact selection menu
+    COBI.app.contact.read(function(contact) {
+      // Send message to the selected contact
+      sendMessage(contact.phone, carousel.current());
+    });
   }
 });
 
-// Helper methods
 
+// Send message to phone number with text for a carousel item id
 function sendMessage(phoneNumber, carouselItemId) {
   
-    // Can send SMS?
+    // Check if user exceeded daily limit
     if (isMessageQuotaExceeded()) {
+      // Show error popup
       COBI.app.textToSpeech.write({"content" : i18next.t('message-quota-exceeded-tts'), "language" : i18next.language})
       Materialize.toast(i18next.t('message-quota-exceeded'), 5000, 'rounded white');
       return;
@@ -57,6 +63,7 @@ function sendMessage(phoneNumber, carouselItemId) {
     var message = '';
     var username = getUsername();
   
+    // Get text message based on selected carousel item
     switch (carouselItemId) {
          // On my way
         case 0: message = username + i18next.t('on-my-way-template');
@@ -96,6 +103,7 @@ function sendMessage(phoneNumber, carouselItemId) {
     // Append "Sent from COBI"
     message += '\n\n' + i18next.t('message-sent-from-cobi');  
     
+    // Send AJAX-call to server
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
       if (request.readyState === 4) {

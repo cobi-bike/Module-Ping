@@ -1,12 +1,13 @@
+// Implementation of menu carousel
 var carousel = (function(document, $) {
   'use strict';
   
   var $carousel = $('.carousel'),
       $list = $('#list'),
       $listItems = $('#list li'),
-      $nItems = $listItems.length,
-      $nView = 3,
-      $current = 0,
+      $nItems = $listItems.length, // Total item count
+      $nView = 3, // How many items should be displayed?
+      $current = 0, // Current item
       
       _init = function() {
         _initWidth();
@@ -14,17 +15,20 @@ var carousel = (function(document, $) {
         COBI.app.textToSpeech.write({"content" : _currentName($current), "language" : i18next.language});
       },
       
+      // Set view of carousel menu
       _initWidth = function() {
         $list.css({
           'margin-left': Math.floor(100 / $nView) + '%',
           'width': Math.floor(100 * ($nItems / $nView)) + '%'
         });
         $listItems.css('width', 100 / $nItems + '%');
+        // Fade in carousel
         $carousel.delay(250).animate({ opacity: 1 }, { duration: 500 });
       },
       
       _eventInit = function() {
-        
+        //  replacements for setTimeout()/setInterval() that makes use of 
+        //  requestAnimationFrame() where possible for better performance      
         window.requestAnimFrame = (function() {
           return  window.requestAnimationFrame       || 
               window.webkitRequestAnimationFrame || 
@@ -68,6 +72,7 @@ var carousel = (function(document, $) {
             clearInterval(handle);
         };
         
+        // Hook on touch event of each coursel item
         $.each($listItems, function(i) {
           var $this = $(this);
           $this.on('touchstart click', function(e) {
@@ -78,6 +83,7 @@ var carousel = (function(document, $) {
         });
       },
       
+      // Move to right item
       _next = function() {
         if ($current >= $nItems-1) {
           _moveTo(0);  
@@ -86,6 +92,7 @@ var carousel = (function(document, $) {
         }
       },    
       
+      // Move to left item
       _prev = function() {
         if ($current <= 0) {
           _moveTo($nItems-1);  
@@ -94,20 +101,25 @@ var carousel = (function(document, $) {
         }
       },     
       
+      // Return current item id
       _current = function() {
         return $current;
       },           
       
+      // Slides to item
       _moveTo = function(x) {
         _moveIt($listItems.eq(x), x);
+        // Announce new selected item
         COBI.app.textToSpeech.write({"content" : _currentName(x), "language" : i18next.language})
       },
       
+      // Returns heading of current item
       _currentName = function(x) {
         var experience = document.getElementById('experience');
         return experience.getElementsByTagName('h2')[x].innerText;                  
       },
       
+      // Animate item movement
       _moveIt = function(obj, x) {
         
         var n = x;
@@ -127,6 +139,7 @@ var carousel = (function(document, $) {
         
       },
 
+      // Cancel animation
       _stopMove = function(x) {
         _moveTo(x);
       };
