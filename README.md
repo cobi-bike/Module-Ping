@@ -68,8 +68,9 @@ Let's take a deeper look to understand how the »Ping«-App works:
 ```
 
 ### Application lifecycle
+Let's understand how our application's logic works:
 The Node.js backend serves index.html on request.  
-On the client side index.js is the main entry point for the application's logic.
+On the client side index.js is the main entry point for the application.
 
 After intializing the COBI DevKit we firstly check if we're in main menu or settings menu mode:
 ``` javascript
