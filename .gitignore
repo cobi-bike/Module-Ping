@@ -1,5 +1,3 @@
-# Ignore config file containing credentials
-/config.js
 
 # Ignore node, git and file system files
 /node_modules
