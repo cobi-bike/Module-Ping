@@ -15,6 +15,9 @@ var db = {};
 // Practical max. limit is 5 mins due to server sleepcycle
 var quotaFreezeInMs = (5 * 1000); 
 
+// Set port from environment variable or default
+var port = process.env.PORT || 3000;
+
 app.use(express.static('public'));
 
 app.get("/", function (request, response) {
@@ -97,6 +100,6 @@ app.post('/text', function(req, res, next) {
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(port, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
