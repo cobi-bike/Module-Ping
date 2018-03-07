@@ -31,9 +31,11 @@ Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module)
 
 This app relies on [twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
 
-### Step 4: Edit configuration file
+### Step 4: Set environment variables
 
-Rename `config.js.EXAMPLE` in the root directory to `config.js` and fill in your twilio credentials. 
+Set the environment variables `TWILIO_ACCOUNT_SID`,  `TWILIO_AUTH_TOKEN` and `TWILIO_FROM_NUMBER` with your twilio credentials.
+
+Otherwise you may set them manually in `config.js`
 
 ### Step 5: Run Node.js server
 
