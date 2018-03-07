@@ -4,6 +4,7 @@
 # Ignore node, git and file system files
 /node_modules
 /.bashrc
+/.config
 /.data
 /.DS_Store
 /.env
