@@ -9,7 +9,7 @@ Its part of a collection of Open Source [modules](https://cobi.bike/devkit) for 
 
 The quickest way to test the app without any setup:
 
-[<img src="https://raw.githubusercontent.com/cobi-bike/DevKit/master/resources/open-demo-btn.png" width="170px" alt="Open demo button">](https://codepen.io/cobi-bike/pen/.......)
+[<img src="https://raw.githubusercontent.com/cobi-bike/DevKit/master/resources/open-demo-btn.png" width="170px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
 
 ## Installation and Setup
 
