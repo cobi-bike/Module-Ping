@@ -38,7 +38,7 @@ function setUsername(username) {
 
 // Returns, if location should be attached to message
 function getAttachLocation() {
-  attachLocation = JSON.parse(localStorage.getItem(localStorageKeyAttachLocation));
+  var attachLocation = JSON.parse(localStorage.getItem(localStorageKeyAttachLocation));
   if (attachLocation == null) {
     return true;
   } else {
