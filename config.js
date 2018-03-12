@@ -7,5 +7,4 @@ config.twilio.auth_token = process.env.TWILIO_AUTH_TOKEN;
 // Twilio sender number
 config.twilio.from_number = process.env.TWILIO_FROM_NUMBER;
 
-
 module.exports = config;

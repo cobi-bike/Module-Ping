@@ -7,13 +7,13 @@ var defaultUsername = i18next.t('default-sender');
 var dailyMessageQuota = 3;
 
 // Set initial state of settings and hook onto events
-var senderInput = document.getElementById("senderInput");
+var senderInput = document.getElementById('senderInput');
 senderInput.value = getUsername();
-senderInput.addEventListener("input", function(event) {
-  setUsername(senderInput.value)
+senderInput.addEventListener('input', function(event) {
+  setUsername(senderInput.value);
 });
 
-var attachLocationToggle = document.getElementById("attachLocationToggle");
+var attachLocationToggle = document.getElementById('attachLocationToggle');
 attachLocationToggle.checked = getAttachLocation();
 attachLocationToggle.onchange = function() {
   setAttachLocation(attachLocationToggle.checked);
@@ -51,7 +51,6 @@ function setAttachLocation(checked) {
   localStorage.setItem(localStorageKeyAttachLocation, JSON.stringify(checked));
 }
 
-
 // Returns array of messages sent on each day
 function getMessagesSent() {
   var messages = JSON.parse(localStorage.getItem(localStorageKeyMessageQuota));
@@ -66,7 +65,7 @@ function getMessagesSent() {
 function getMessagesSentCount() {
   var messages = getMessagesSent();
   var qId = getQuotaId();
-  return (messages[qId] == null) ? 0 : messages[qId];
+  return messages[qId] == null ? 0 : messages[qId];
 }
 
 // Increments messages sent today
@@ -100,7 +99,9 @@ function getToken() {
 // Returns random token id
 function generateGuid() {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
   }
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
