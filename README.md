@@ -3,7 +3,7 @@
 The Ping DevKit module allows users to send prefabricated SMS to their contacts on the fly.
 Its part of a collection of Open Source [modules](https://cobi.bike/devkit) for the [COBI.bike](https://cobi.bike) system.
 
-![COBI.bike Ping App](https://cobi.bike/sites/default/files/cobi-assets/cobi-devkit-demo-ping-small_0.jpg)
+<img src="screenshot.png" width="500px" alt="COBI.bike Ping module">
 
 ## Quickstart: Interactive Demo
 
