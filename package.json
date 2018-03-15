@@ -2,6 +2,7 @@
   "name": "cobi-module-ping",
   "version": "0.0.1",
   "description": "The Ping DevKit module allows users to send prefabricated SMS to their contacts on the fly.",
+  "license": "MIT",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
