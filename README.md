@@ -50,7 +50,7 @@ The settings menu can be accessed with the [?state=edit](http://localhost:8888/?
 The module accesses a native contact menu through a Cobi.js API bridge. To send a message anyway, we simply spoof the API function:
 ``` javascript
 COBI.app.contact.read = function(callback) {
-	contact = {};
+	var contact = {};
 	contact.phone = '+49 1234 56789';
 	callback(contact);
 }
