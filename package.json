@@ -1,10 +1,7 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "my-gomix-app",
+  "name": "cobi-module-ping",
   "version": "0.0.1",
-  "description": "What am I about?",
+  "description": "The Ping DevKit module allows users to send prefabricated SMS to their contacts on the fly.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -18,11 +15,6 @@
     "node": "6.9.1"
   },
   "repository": {
-    "url": "https://gomix.com/#!/project/welcome-project"
-  },
-  "keywords": [
-    "node",
-    "gomix",
-    "express"
-  ]
+    "url": "https://github.com/cobi-bike/Module-Ping/"
+  }
 }
