@@ -47,7 +47,7 @@ The settings menu can be accessed with the [?state=edit](http://localhost:8888/?
 
 ### Step 6: Spoof contact menu
 
-The module accesses a native contact menu through a Cobi.js API bridge. To send a message anyway, we spoof simply spoof the API function:
+The module accesses a native contact menu through a Cobi.js API bridge. To send a message anyway, we simply spoof the API function:
 ``` javascript
 COBI.app.contact.read = function(callback) {
 	contact = {};
