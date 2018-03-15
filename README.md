@@ -7,13 +7,13 @@ Its part of a collection of Open Source [modules](https://cobi.bike/devkit) for 
 
 ## Quickstart: Interactive Demo
 
-The quickest way to test the app without any setup:
+The quickest way to test the module:
 
 [<img src="https://cdn.cobi.bike/static/devkit-assets/github/open_demo_button.png" width="170px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
 
 ## Installation and Setup
 
-You can easily deploy the app on your own:
+You can easily deploy the module on your own:
 
 ### Step 1: Clone repository
 
@@ -45,6 +45,16 @@ PORT=8888 node server.js
 ```  
 The settings menu can be accessed with the [?state=edit](http://localhost:8888/?state=edit) suffix.
 
+### Step 6: Spoof contact menu
+
+The module accesses a native contact menu through a Cobi.js API bridge. To send a message anyway, we spoof simply spoof the API function:
+``` javascript
+COBI.app.contact.read = function(callback) {
+	contact = {};
+	contact.phone = '+49 1234 56789';
+	callback(contact);
+}
+```
 
 ## Documentation
 
