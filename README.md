@@ -13,7 +13,7 @@ The quickest way to test the app without any setup:
 
 ## Installation and Setup
 
-You can easily deploy the app on you own:
+You can easily deploy the app on your own:
 
 ### Step 1: Clone repository
 
@@ -25,11 +25,11 @@ npm install
 
 ### Step 2: Install COBI.bike DevKit
 
-Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module) to install the COBI.bike Google Chrome Simulator and get familiar with the basics of app development on the COBI plattform.
+Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module) to install the COBI.bike Google Chrome Simulator and get familiar with the basics of module development on the COBI plattform.
 
 ### Step 3: Create a twilio account
 
-This app relies on [twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
+This module relies on [twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
 
 ### Step 4: Set environment variables
 
@@ -39,7 +39,7 @@ Otherwise you may set them manually in `config.js`
 
 ### Step 5: Run Node.js server
 
-The app is accessible under [localhost:8888](http://localhost:8888/) after starting the Node.js server with:
+The module is accessible under [localhost:8888](http://localhost:8888/) after starting the Node.js server with:
 ``` bash
 PORT=8888 node server.js
 ```  
@@ -48,7 +48,7 @@ The settings menu can be accessed with the [?state=edit](http://localhost:8888/?
 
 ## Documentation
 
-Let's take a deeper look to understand how the »Ping«-App works:
+Let's take a deeper look to understand how the  Ping module works:
 
 ### File structure
 ```
@@ -181,7 +181,7 @@ client.sendMessage(options, function(err, response) {
 ---
 
 ## Credits
-This application uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
+This module uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
 
 [Carousel Team](https://codepen.io/fixcl/pen/KwpKvb) by Marco Barría (MIT)
 
