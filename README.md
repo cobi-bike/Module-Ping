@@ -62,7 +62,6 @@ Let's take a deeper look to understand how the  Ping module works:
 
 ### File structure
 ```
-├── config.js.EXAMPLE       Credential config (rename to config.js)
 ├── LICENSE
 ├── package.json
 ├── public
