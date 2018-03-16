@@ -1,12 +1,8 @@
-// server.js
-// where your node app starts
 
-// init project
 var express = require('express');
 var app = express();
 var twilio = require('twilio');
 var formidable = require('formidable');
-var config = require('./config');
 
 // init in-memory db for quotas
 var db = {};
@@ -17,6 +13,17 @@ var quotaFreezeInMs = 5 * 1000;
 
 // Set port from environment variable or default
 var port = process.env.PORT || 3000;
+
+// Set environment variables
+var account_sid = process.env.TWILIO_ACCOUNT_SID;
+var auth_token = process.env.TWILIO_AUTH_TOKEN;
+var from_number = process.env.TWILIO_FROM_NUMBER;
+
+// If env variables are not set, quit application with error exit code
+if (!account_sid || !auth_token || !from_number) {
+  console.log("Error: Missing environment variables")
+  process.exit(1);
+}
 
 app.use(express.static('public'));
 
@@ -71,11 +78,11 @@ app.post('/text', function(req, res, next) {
     // Prepare to send message
     console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' with token ' + token);
 
-    var client = new twilio.RestClient(config.twilio.account_sid, config.twilio.auth_token);
+    var client = new twilio.RestClient(account_sid, auth_token);
 
     var options = {
       to: recipient,
-      from: config.twilio.from_number,
+      from: from_number,
       body: message,
       statusCallback: null
     };
