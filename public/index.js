@@ -53,7 +53,7 @@ function sendMessage(phoneNumber, carouselItemId) {
   if (isMessageQuotaExceeded()) {
     // Show error popup
     COBI.app.textToSpeech.write({ content: i18next.t('message-quota-exceeded-tts'), language: i18next.language });
-    Materialize.toast(i18next.t('message-quota-exceeded'), 5000, 'rounded white');
+    Materialize.toast(i18next.t('message-quota-exceeded'), 5 * 1000, 'rounded white');
     return;
   }
 
@@ -114,14 +114,14 @@ function sendMessage(phoneNumber, carouselItemId) {
   // Send AJAX-call to server
   var request = new XMLHttpRequest();
   request.onreadystatechange = function() {
-    if (request.readyState === 4) {
+    if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {
         COBI.app.textToSpeech.write({ content: i18next.t('message-sent-success-tts'), language: i18next.language });
-        Materialize.toast(i18next.t('message-sent-success'), 5000, 'rounded white');
+        Materialize.toast(i18next.t('message-sent-success'), 5 * 1000, 'rounded white');
         incrementMessagesSent();
       } else {
         COBI.app.textToSpeech.write({ content: i18next.t('message-sent-failed-tts'), language: i18next.language });
-        Materialize.toast(i18next.t('message-sent-failed'), 5000, 'rounded white');
+        Materialize.toast(i18next.t('message-sent-failed'), 5 + 1000, 'rounded white');
       }
     }
   };
