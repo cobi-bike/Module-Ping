@@ -12,7 +12,14 @@ The quickest way to test the module via [Glitch.com](https://glitch.com):
 [<img src="https://cdn.cobi.bike/static/devkit-assets/github/open_demo_button.png" width="170px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
 
 Glitch.com allows you to edit, host and fork Node.js applications for quick prototyping.
-Follow the [installation steps](#installation-and-setup) and copy the environment variables to the: `:key:.env` file on Glitch.com
+Follow the [installation steps 2 to 3](#installation-and-setup) and copy the environment variables to the: `.env` file on Glitch.com
+
+## Overview
+This module relies on [Twilio.com](https://www.twilio.com/) to send custom SMS from a Node.js backend.
+
+The backend serves a static web page to the client, which allows the user to pick between several prefabricated messages. After choosing a message, the user has to select a recipient from his contacts. The message is then sent back to the Node.js backend, which will forward to message to Twilio.
+
+The backend enforces a maximum message quota and CSRF protection.
 
 ## Installation and Setup
 
@@ -32,13 +39,11 @@ Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module)
 
 ### Step 3: Create a twilio account
 
-This module relies on [twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
+This module relies on [Twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
 
 ### Step 4: Set environment variables
 
 Set the environment variables `TWILIO_ACCOUNT_SID`,  `TWILIO_AUTH_TOKEN` and `TWILIO_FROM_NUMBER` with your twilio credentials.
-
-Otherwise you may set them manually in `config.js`
 
 ### Step 5: Run Node.js server
 
