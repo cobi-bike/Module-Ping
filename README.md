@@ -7,9 +7,12 @@ Its part of a collection of Open Source [modules](https://cobi.bike/devkit) for 
 
 ## Quickstart: Interactive Demo
 
-The quickest way to test the module:
+The quickest way to test the module via [Glitch.com](https://glitch.com):
 
 [<img src="https://cdn.cobi.bike/static/devkit-assets/github/open_demo_button.png" width="170px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
+
+Glitch.com allows you to edit, host and fork Node.js applications for quick prototyping.
+Follow the [installation steps](#installation-and-setup) and copy the environment variables to the: `:key:.env` file on Glitch.com
 
 ## Installation and Setup
 
