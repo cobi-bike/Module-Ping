@@ -3,13 +3,14 @@ var express = require('express');
 var app = express();
 var twilio = require('twilio');
 var formidable = require('formidable');
+var requestIp = require('request-ip');
 
 // init in-memory db for quotas
 var db = {};
+var db_timestamp = Date.now();
+var db_lifetime = 24 * 60 * 60 * 1000; // 24 hours in ms
+var quota = 5; // messages per day
 
-// Quota of 1 message á 5 secs
-// Practical max. limit is 5 mins due to server sleepcycle
-var quotaFreezeInMs = 5 * 1000;
 
 // Set port from environment variable or default
 var port = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ if (!account_sid || !auth_token || !from_number) {
   process.exit(1);
 }
 
+app.use(requestIp.mw());
 app.use(express.static('public'));
 
 app.get('/', function(request, response) {
@@ -36,23 +38,25 @@ app.post('/text', function(req, res, next) {
   form.parse(req, function(err, fields, files) {
     var message = fields.message;
     var recipient = fields.recipient;
-    var token = fields.token;
 
-    // Guard invalid tokens
-    if (token == null || token.length < 36) {
-      console.log('Invalid token: No token provided.');
-      res.sendStatus(422);
-      return;
+    // Clear database if lifetime is exceeded
+    if (Date.now() - db_timestamp > db_lifetime) {
+      db_timestamp = Date.now();
+      db = {};
     }
 
-    // Guard freeze periods
-    var now = new Date();
-
-    if (db[token] == null || now - db[token] > quotaFreezeInMs) {
-      console.log('Valid token: Quota check successful');
-      db[token] = now;
+    // Increase access counter by one
+    var ip = req.clientIp;
+    console.log(ip);
+    if (db[ip] == null) {
+      db[ip] = 1;
     } else {
-      console.log('Token Exceeded Quota.');
+      db[ip]++;
+    }
+
+    // Check if quota is exceeded
+    if (db[ip] > quota) {
+      console.log('Exceeded Quota.');
       res.sendStatus(429);
       return;
     }
@@ -76,7 +80,7 @@ app.post('/text', function(req, res, next) {
     var maskedRecipient = recipient.substr(0, recipient.length - 5) + '*****';
 
     // Prepare to send message
-    console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' with token ' + token);
+    console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' from ip ' + ip);
 
     var client = new twilio.RestClient(account_sid, auth_token);
 
@@ -90,10 +94,10 @@ app.post('/text', function(req, res, next) {
     client.sendMessage(options, function(err, response) {
       if (err) {
         console.error(err);
-        res.sendStatus(503);
+        res.send(503);
       } else {
         console.log('Message (' + maskedMessage + ') sent to ' + maskedRecipient);
-        res.sendStatus(200);
+        res.send(200);
       }
     });
   });

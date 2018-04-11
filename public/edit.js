@@ -1,5 +1,4 @@
 // Init constants
-var localStorageKeyToken = 'ping-utoken';
 var localStorageKeyUsername = 'ping-uname';
 var localStorageKeyMessageQuota = 'ping-quota';
 var localStorageKeyAttachLocation = 'ping-attachlocation';
@@ -86,22 +85,3 @@ function getQuotaId() {
   return new Date().toISOString().slice(0, 10);
 }
 
-// Returns user token from local storage or generates a new one
-function getToken() {
-  var token = localStorage.getItem(localStorageKeyToken);
-  if (token == null || token == '') {
-    token = generateGuid();
-    localStorage.setItem(localStorageKeyToken, token);
-  }
-  return token;
-}
-
-// Returns random token id
-function generateGuid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}

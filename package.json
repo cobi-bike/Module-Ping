@@ -10,6 +10,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "formidable": "^1.1.1",
+    "request-ip": "^2.0.2",
     "twilio": "2.11.1"
   },
   "engines": {

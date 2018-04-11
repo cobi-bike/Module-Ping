@@ -129,7 +129,6 @@ function sendMessage(phoneNumber, carouselItemId) {
   var data = new FormData();
   data.append('message', message);
   data.append('recipient', phoneNumber);
-  data.append('token', getToken());
 
   request.open('POST', 'text', true);
   request.send(data);
