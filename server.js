@@ -94,10 +94,10 @@ app.post('/text', function(req, res, next) {
     client.sendMessage(options, function(err, response) {
       if (err) {
         console.error(err);
-        res.send(503);
+        res.sendStatus(503);
       } else {
         console.log('Message (' + maskedMessage + ') sent to ' + maskedRecipient);
-        res.send(200);
+        res.sendStatus(200);
       }
     });
   });
