@@ -12,14 +12,14 @@ The quickest way to test the module via [Glitch.com](https://glitch.com):
 [<img src="https://cdn.cobi.bike/static/devkit-assets/github/open_demo_button.png" width="170px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
 
 Glitch.com allows you to edit, host and fork Node.js applications for quick prototyping.
-Follow the [installation steps 2 to 3](#installation-and-setup) and copy the environment variables to the: `.env` file on Glitch.com
+Follow the [installation step 2](#installation-and-setup) and copy the environment variables to the: `.env` file on Glitch.com
 
 ## Overview
 This module relies on [Twilio.com](https://www.twilio.com/) to send custom SMS from a Node.js backend.
 
 The backend serves a static web page to the client, which allows the user to pick between several prefabricated messages. After choosing a message, the user has to select a recipient from his contacts. The message is then sent back to the Node.js backend, which will forward to message to Twilio.
 
-The backend enforces a maximum message quota and CSRF protection.
+The backend enforces a maximum message quota by IP address.
 
 ## Installation and Setup
 
@@ -33,19 +33,15 @@ Clone this repository and install Node.js dependencies with:
 npm install
 ```  
 
-### Step 2: Install COBI.bike DevKit Simulator
-
-Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module) to install the COBI.bike Google Chrome Simulator and get familiar with the basics of module development on the COBI plattform.
-
-### Step 3: Create a twilio account
+### Step 2: Create a twilio account
 
 This module relies on [Twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
 
-### Step 4: Set environment variables
+### Step 3: Set environment variables
 
 Set the environment variables `TWILIO_ACCOUNT_SID`,  `TWILIO_AUTH_TOKEN` and `TWILIO_FROM_NUMBER` with your twilio credentials.
 
-### Step 5: Run Node.js server
+### Step 4: Run Node.js server
 
 The module is accessible under [localhost:3000](http://localhost:3000/) after starting the Node.js server with:
 ``` bash
@@ -53,7 +49,7 @@ node server.js
 ```  
 The settings menu can be accessed with the [?state=edit](http://localhost:3000/?state=edit) suffix.
 
-### Step 6: Spoof contact menu
+### Step 5: Spoof contact menu
 
 The module accesses a native contact menu through a Cobi.js API bridge. To send a message anyway, we simply spoof the API function:
 ``` javascript
@@ -63,6 +59,10 @@ COBI.app.contact.read = function(callback) {
 	callback(contact);
 }
 ```
+
+### _Optional_: Install COBI.bike DevKit Simulator
+
+Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module) to install the COBI.bike Google Chrome Simulator and get familiar with the basics of module development on the COBI plattform.
 
 ## Credits
 This module uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
