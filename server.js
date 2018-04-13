@@ -47,7 +47,6 @@ app.post('/text', function(req, res, next) {
 
     // Increase access counter by one
     var ip = req.clientIp;
-    console.log(ip);
     if (db[ip] == null) {
       db[ip] = 1;
     } else {
