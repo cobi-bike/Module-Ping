@@ -1,7 +1,7 @@
 # Ping DevKit module for COBI.bike
 
-The Ping DevKit module allows users to send prefabricated SMS to their contacts on the fly.
-Its part of a collection of Open Source [modules](https://cobi.bike/devkit) for the [COBI.bike](https://cobi.bike) system.
+The Ping DevKit module allows users to send a preformatted SMS to their contacts on the fly.
+It's part of a collection of Open Source [modules](https://cobi.bike/devkit) for the [COBI.bike](https://cobi.bike) system.
 
 <img src="screenshot.png" width="500px" alt="COBI.bike Ping module">
 
@@ -15,9 +15,9 @@ Glitch.com allows you to edit, host and fork Node.js applications for quick prot
 Follow the [installation step 2](#installation-and-setup) and copy the environment variables to the: `.env` file on Glitch.com
 
 ## Overview
-This module relies on [Twilio.com](https://www.twilio.com/) to send custom SMS from a Node.js backend.
+This module relies on [Twilio.com](https://www.twilio.com/) to send a custom SMS from a Node.js backend.
 
-The backend serves a static web page to the client, which allows the user to pick between several prefabricated messages. After choosing a message, the user has to select a recipient from his contacts. The message is then sent back to the Node.js backend, which will forward to message to Twilio.
+The backend serves a static web page to the client, which allows the user to pick between several preformatted messages. After choosing a message, the user has to select a recipient from his contacts. The message is then sent back to the Node.js backend, which will forward to message to Twilio.
 
 The backend enforces a maximum message quota by IP address.
 
@@ -35,7 +35,7 @@ npm install
 
 ### Step 2: Create a twilio account
 
-This module relies on [Twilio.com](https://www.twilio.com/) to send custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
+This module relies on [Twilio.com](https://www.twilio.com/) to send a custom SMS from the Node.js backend. Create an account, setup »Programmable SMS« and retrieve your api credentials. For testing purposes consider using test credentials found in the General Settings.
 
 ### Step 3: Set environment variables
 
