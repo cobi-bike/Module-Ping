@@ -1,6 +1,6 @@
 # Ping DevKit module for COBI.bike
 
-The Ping DevKit module allows users to send a preformatted SMS to their contacts on the fly.
+The DevKit module "Ping" allows users to send a preformatted SMS to their contacts on the fly.
 It's part of a collection of Open Source [modules](https://cobi.bike/devkit) for the [COBI.bike](https://cobi.bike) system.
 
 <img src="screenshot.png" width="500px" alt="COBI.bike Ping module">
@@ -9,7 +9,7 @@ It's part of a collection of Open Source [modules](https://cobi.bike/devkit) for
 
 The quickest way to test the module via [Glitch.com](https://glitch.com):
 
-[<img src="https://cdn.cobi.bike/static/devkit-assets/github/open_demo_button.png" width="170px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
+[<img src="open_demo.png" width="250px" alt="Open demo button">](https://glitch.com/edit/#!/import/github/cobi-bike/Module-Ping)
 
 Glitch.com allows you to edit, host and fork Node.js applications for quick prototyping.
 Follow the [installation step 2](#installation-and-setup) and copy the environment variables to the: `.env` file on Glitch.com
