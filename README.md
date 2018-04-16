@@ -87,4 +87,3 @@ Anyone and everyone is welcome to contribute to this project, the [DevKit Simula
 * [Pull requests](https://github.com/cobi-bike/DevKit/blob/master/CONTRIBUTING.md#pull-requests)
 
 Copyright © 2018 COBI.bike GmbH
-platform
