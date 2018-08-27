@@ -1,8 +1,8 @@
 CACHE MANIFEST
-# Version 43
+# Version 44
 
 CACHE:
-# Defines resources to be cached 
+# Defines resources to be cached
 index.js
 slider.js
 style.css

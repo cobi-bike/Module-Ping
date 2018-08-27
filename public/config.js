@@ -3,6 +3,7 @@
 i18next.init(
   {
     lng: COBI.parameters.language(),
+    fallbackLng: ['en', 'de'],
     resources: {
       en: {
         translation: {
