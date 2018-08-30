@@ -81,7 +81,7 @@ app.post('/text', function(req, res, next) {
     // Prepare to send message
     console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' from ip ' + ip);
 
-    var client = new twilio.RestClient(account_sid, auth_token);
+    var client = new twilio(account_sid, auth_token);
 
     var options = {
       to: recipient,
@@ -90,15 +90,14 @@ app.post('/text', function(req, res, next) {
       statusCallback: null
     };
 
-    client.sendMessage(options, function(err, response) {
-      if (err) {
-        console.error(err);
-        res.sendStatus(503);
-      } else {
-        console.log('Message (' + maskedMessage + ') sent to ' + maskedRecipient);
-        res.sendStatus(200);
-      }
+    client.messages.create(options).then(function() {
+      console.log('Message (' + maskedMessage + ') sent to ' + maskedRecipient);
+      res.sendStatus(200);
+    }).catch(function(err) {
+      console.error(err);
+      res.sendStatus(503);
     });
+    
   });
 });
 
