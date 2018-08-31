@@ -8,8 +8,10 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
     "express": "^4.14.0",
     "formidable": "^1.1.1",
+    "gelf-stream-renewed": "^1.2.2",
     "request-ip": "^2.0.2",
     "twilio": "^3.19.2"
   },

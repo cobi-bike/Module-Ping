@@ -4,6 +4,7 @@ var app = express();
 var twilio = require('twilio');
 var formidable = require('formidable');
 var requestIp = require('request-ip');
+var log = require('./logger')('events');
 
 // init in-memory db for quotas
 var db = {};
@@ -91,13 +92,15 @@ app.post('/text', function(req, res, next) {
     };
 
     client.messages.create(options).then(function() {
+      log.info('message_sent', { message: maskedMessage, recipient: maskedRecipient });
       console.log('Message (' + maskedMessage + ') sent to ' + maskedRecipient);
       res.sendStatus(200);
     }).catch(function(err) {
+      log.error(error);
       console.error(err);
       res.sendStatus(503);
     });
-    
+
   });
 });
 
