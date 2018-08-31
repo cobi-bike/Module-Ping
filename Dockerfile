@@ -7,8 +7,10 @@ ENV PORT=3000
 
 COPY package.json .
 
-RUN npm install --production
-
+RUN apk add --no-cache --virtual .build-deps make gcc g++ python \
+ && npm install --production --silent \
+ && apk del .build-deps
+ 
 COPY . .
 
 EXPOSE 3000
