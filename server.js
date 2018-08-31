@@ -87,8 +87,7 @@ app.post('/text', function(req, res, next) {
     var options = {
       to: recipient,
       from: from_number,
-      body: message,
-      statusCallback: null
+      body: message
     };
 
     client.messages.create(options).then(function() {
