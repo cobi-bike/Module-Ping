@@ -1,9 +1,9 @@
-# Ping DevKit module for COBI.bike
+# Ping DevKit module for COBI.Bike
 
 The DevKit module "Ping" allows users to send a preformatted SMS to their contacts on the fly.
 It's part of a collection of Open Source [modules](https://cobi.bike/devkit) for the [COBI.bike](https://cobi.bike) system.
 
-<img src="screenshot.png" width="500px" alt="COBI.bike Ping module">
+<img src="screenshot.png" width="500px" alt="COBI.Bike Ping module">
 
 ## Quickstart: Interactive Demo
 
@@ -60,9 +60,9 @@ COBI.app.contact.read = function(callback) {
 }
 ```
 
-### _Optional_: Install COBI.bike DevKit Simulator
+### _Optional_: Install COBI.Bike DevKit Simulator
 
-Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module) to install the COBI.bike Google Chrome Simulator and get familiar with the basics of module development on the COBI plattform.
+Follow the [instructions](https://github.com/cobi-bike/DevKit#-test-your-module) to install the COBI.Bike Google Chrome Simulator and get familiar with the basics of module development on the COBI plattform.
 
 ## Credits
 This module uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
@@ -86,4 +86,4 @@ Anyone and everyone is welcome to contribute to this project, the [DevKit Simula
 * [Feature requests](https://github.com/cobi-bike/DevKit/blob/master/CONTRIBUTING.md#features)
 * [Pull requests](https://github.com/cobi-bike/DevKit/blob/master/CONTRIBUTING.md#pull-requests)
 
-Copyright © 2018 COBI.bike GmbH
+Copyright © 2018 COBI.Bike GmbH
