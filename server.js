@@ -23,7 +23,7 @@ var from_number = process.env.TWILIO_FROM_NUMBER;
 
 // If env variables are not set, quit application with error exit code
 if (!account_sid || !auth_token || !from_number) {
-  log.info("Error: Missing environment variables")
+  log.error("Missing environment variables")
   process.exit(1);
 }
 
