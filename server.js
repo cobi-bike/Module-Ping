@@ -91,10 +91,9 @@ app.post('/text', function(req, res, next) {
     };
 
     client.messages.create(options).then(function() {
-      log.info('message_sent', { message: maskedMessage, recipient: maskedRecipient });
       res.sendStatus(200);
     }).catch(function(err) {
-      log.error(error);
+      log.error(err);
       res.sendStatus(503);
     });
 
