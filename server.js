@@ -4,6 +4,7 @@ var app = express();
 var twilio = require('twilio');
 var formidable = require('formidable');
 var requestIp = require('request-ip');
+var log = require('./logger')('events');
 
 // init in-memory db for quotas
 var db = {};
@@ -22,7 +23,7 @@ var from_number = process.env.TWILIO_FROM_NUMBER;
 
 // If env variables are not set, quit application with error exit code
 if (!account_sid || !auth_token || !from_number) {
-  console.log("Error: Missing environment variables")
+  log.error("Missing environment variables")
   process.exit(1);
 }
 
@@ -55,21 +56,21 @@ app.post('/text', function(req, res, next) {
 
     // Check if quota is exceeded
     if (db[ip] > quota) {
-      console.log('Exceeded Quota.');
+      log.info('Exceeded Quota.');
       res.sendStatus(429);
       return;
     }
 
     // Guard invalid requests
     if (message == null || message.length < 10) {
-      console.log('Invalid request: No message provided.');
+      log.info('Invalid request: No message provided.');
       res.sendStatus(422);
       return;
     }
 
     // Guard invalid recipient
     if (recipient == null || recipient.length < 6) {
-      console.log('Invalid request: No recipient provided.');
+      log.info('Invalid request: No recipient provided.');
       res.sendStatus(422);
       return;
     }
@@ -79,30 +80,27 @@ app.post('/text', function(req, res, next) {
     var maskedRecipient = recipient.substr(0, recipient.length - 5) + '*****';
 
     // Prepare to send message
-    console.log('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' from ip ' + ip);
+    log.info('Sending message ' + maskedMessage + ' to ' + maskedRecipient + ' from ip ' + ip);
 
-    var client = new twilio.RestClient(account_sid, auth_token);
+    var client = new twilio(account_sid, auth_token);
 
     var options = {
       to: recipient,
       from: from_number,
-      body: message,
-      statusCallback: null
+      body: message
     };
 
-    client.sendMessage(options, function(err, response) {
-      if (err) {
-        console.error(err);
-        res.sendStatus(503);
-      } else {
-        console.log('Message (' + maskedMessage + ') sent to ' + maskedRecipient);
-        res.sendStatus(200);
-      }
+    client.messages.create(options).then(function() {
+      res.sendStatus(200);
+    }).catch(function(err) {
+      log.error(err);
+      res.sendStatus(503);
     });
+
   });
 });
 
 // listen for requests :)
 var listener = app.listen(port, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+  log.info('Your app is listening on port ' + listener.address().port);
 });
