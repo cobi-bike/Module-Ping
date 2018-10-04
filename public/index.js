@@ -3,7 +3,7 @@ COBI.init('token');
 COBI.devkit.overrideThumbControllerMapping.write(true);
 
 // Check if where in main menu oder settings menu
-if (COBI.parameters.state() == COBI.state.edit) {
+if (COBI.parameters.context() == COBI.context.offRideSettings || COBI.parameters.context() == COBI.context.onRideSettings) {
   document.getElementById('experience').style.display = 'none';
 } else {
   document.getElementById('edit').style.display = 'none';
