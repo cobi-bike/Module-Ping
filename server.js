@@ -10,7 +10,7 @@ var log = require('./logger')('events');
 var db = {};
 var db_timestamp = Date.now();
 var db_lifetime = 24 * 60 * 60 * 1000; // 24 hours in ms
-var quota = 5; // messages per day
+var quota = 10; // messages per day
 
 
 // Set port from environment variable or default
