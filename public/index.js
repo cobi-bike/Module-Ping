@@ -34,15 +34,21 @@ COBI.navigationService.eta.subscribe(function(value) {
 });
 
 // Listen for input from the external controler
+var hasSentMessage = false;
 COBI.hub.externalInterfaceAction.subscribe(function(action) {
   // Swipe carousel based on input
   if (action == 'UP' || action == 'RIGHT') carousel.next();
   if (action == 'DOWN' || action == 'LEFT') carousel.prev();
   if (action == 'SELECT') {
+    hasSentMessage = false;
+
     // Present user with contact selection menu
     COBI.app.contact.read(function(contact) {
       // Send message to the selected contact
-      sendMessage(contact.phone, carousel.current());
+      if(!hasSentMessage) {
+        sendMessage(contact.phone, carousel.current());
+        hasSentMessage = true;
+      }
     });
   }
 });
